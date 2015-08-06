@@ -7,6 +7,7 @@
 Class UserController extends BaseController {
 	
 		//get the view page for register
+
 		public function getCreate(){
 			
 				echo  "asni";
@@ -16,6 +17,7 @@ Class UserController extends BaseController {
 
 		public function getLogin(){
 
+				echo "asd";
 
 		}
 	

@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-ssssssssssss
-</body>
-</html>
+@extends('layouts.master')
+
+@section('head')
+	@parent
+
+	<title>Home page</title>
+
+   @stop
