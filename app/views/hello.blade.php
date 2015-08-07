@@ -6,3 +6,7 @@
 	<title>Home page</title>
 
    @stop
+
+   @section('content')
+    Home Page
+    @stop

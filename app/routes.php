@@ -11,12 +11,18 @@
 |
 */
 
-Route::get('/', 'HomeController@hello');
-
+Route::get('/', array('uses' => 'HomeController@hello' , 'as' => 'hello'));
 
 Route::group(array('before' => 'guest'),function(){
 
-		Route::get('user/create', 'UserController@getCreate');
-		Route::get('user/login', 'UserController@getLogin');
+		Route::get('/user/create', array('uses' => 'UserController@getCreate' , 'as' => 'getCreate'));
+		Route::get('/user/login', array('uses' => 'UserController@getLogin' , 'as' => 'getLogin'));
+
+});	
+
+Route::group(array('before' => 'csrf' ) , function(){
+
+	Route::get('/user/postCreate', array('uses' => 'UserController@postCreate', 'as' => 'postCreate') );
+	Route::get('/user/postLogin',  array('uses' => 'UserController@postLogin' , 'as' => 'postLogin'));
 
 });
