@@ -10,8 +10,8 @@ Class UserController extends BaseController {
 
 		public function getCreate(){
 			
-				r//eturn View::make('user.register');
-				echo 'asdasd';
+				return View::make('user.register');
+				//echo 'asdasd';
 		}
 
 		//get the view page for login
