@@ -35,6 +35,21 @@ Class UserController extends BaseController {
 			if ($validate->fails()) {
 				# code...
 					return Redirect::route('getCreate')->withErrors($validate)->withInput();
+				
+				} else {
+
+				$user = new User();
+				$user->username = Input::get('username');
+				$user->password = Hash::make(Input::get('pass1'));
+
+				if ($user->save()) {
+					# code...
+					return Redirect::route('home')->with('success','You Register');
+
+				} else {
+
+					return Redirect::route('home')->with('fail' , 'A Error Occured'	);
+				}
 			}
 		}
 
