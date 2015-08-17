@@ -18,7 +18,7 @@ Class UserController extends BaseController {
 
 		public function getLogin(){
 
-				echo "asd";
+				return View::make('user.login');
 
 		}
 
@@ -55,7 +55,17 @@ Class UserController extends BaseController {
 
 		public function postLogin(){
 
+				$validate = Validator::make(Input::all(),array(
 
+						'username' => 'required',
+						'password' => 'required'
+
+					));
+
+				if ($validate->fails()) {
+					# code...
+						return 
+				}
 		}
 	
 }
