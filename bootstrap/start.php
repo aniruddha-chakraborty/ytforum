@@ -25,8 +25,9 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(array(
-	'local' => array('homestead'), //[Homestead] is the name of you configure of your pc
-//in my case i set local' => array('FelipeQuadros'),
+	'local' => array('homestead'), 
+	//[Homestead] is the name of you configure of my pc
+	//in my case i set local' => array('FelipeQuadros'),
 ));
 
 /*

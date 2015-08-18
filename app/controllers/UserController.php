@@ -64,7 +64,26 @@ Class UserController extends BaseController {
 
 				if ($validate->fails()) {
 					# code...
-						return 
+						return Redirect::route('getLogin')->withErrors($Validator)->withInput();
+
+				} else {
+
+						$remember = (Input::has('getLogin')) ? true: false;
+						$auth = Auth::attempt(array(
+
+								'username' => Input::get('username'),
+								'password' => Input::get('password')
+
+							),$remember);
+
+						if ($auth) {
+							# code...
+							return Redirect::intend('/');
+						
+							} else {
+
+							return Redirect::route('getLogin')->with('fail','You Entered the Wrong login Credentials');
+						}
 				}
 		}
 	
