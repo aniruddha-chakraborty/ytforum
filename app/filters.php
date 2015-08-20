@@ -48,6 +48,16 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('admin', function() {
+
+		if ( !(Auth::check() && Auth::user()->isAdmin()) ) {
+			# code...
+				return Redirect::route('home');
+		}
+
+});
+
+
 
 Route::filter('auth.basic', function()
 {

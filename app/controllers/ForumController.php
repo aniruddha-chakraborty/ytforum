@@ -51,4 +51,51 @@ Class ForumController extends BaseController{
 					}
 			}
 		}
+
+
+		public function deleteGroup($id){
+
+			$group = ForumGroup::find($id);
+
+				if ($group == null) {
+					# code...
+						Redirect::route('forum-home')->with('fail','That Group Doesn\'t exists');
+				} else {
+
+					$categories = ForumCategory::where('group_id',$id);
+					$threads    = ForumThread::where('group_id',$id);
+					$comments   = ForumComment::where('group_id',$id);
+						
+						$delCa  = true;
+						$delT   = true;
+						$delCo  = true;
+						
+
+						if ($categories->count() > 0) {
+							# code...
+								$categories->delete();
+						}
+
+						if ($threads->count() > 0) {
+							# code...
+								$threads->delete();
+						}
+
+						if ($comments->count() > 0) {
+							# code...
+								$comments->delete();
+						}
+						
+
+						if ($delCa && $delT && $delCo && $group->delete()) {
+							# code...
+							return Redirect::route('forum-home')->with('success' , 'The Group was deleted ');
+
+						} else {
+
+							return Redirect::route('forum-home')->with('fail','An error occured while the group');
+						}
+				}
+
+		}
 }

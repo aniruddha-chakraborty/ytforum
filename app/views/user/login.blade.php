@@ -9,12 +9,6 @@
 
    @section('content')
    
-   @if(Session::has('success'))
-      <div class="alert alert-success">{{ Session::get('success') }}</div>
-   @elseif (Session::has('fail'))
-      <div class="alert alert-danger">{{ Session::get('fail') }}</div>
-   @endif
-   
    		<div class="container">
    				<h1>Login</h1>
    					<form role="form" method="post" action="{{ URL::route('postLogin') }}">
