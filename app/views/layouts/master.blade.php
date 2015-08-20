@@ -5,6 +5,7 @@
 	@section('head')
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	@show
 </head>
 
@@ -31,8 +32,8 @@
 							@if(!Auth::check())
 							<li><a href="{{ URL::route('getCreate') }}">Register</a></li>
 							<li><a href="{{ URL::route('getLogin') }}">Login</a></li>
-							@elseif
-							<li><a href="{{ URL::route('getCreate') }}">Logout</a></li>
+							@else
+							<li><a href="{{ URL::route('getLogout') }}">Logout</a></li>
 							@endif
 
 						</ul>
@@ -41,8 +42,10 @@
 			</div>
 	</div>
 
-		@yield('content')
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+		<div class="container"> @yield('content') </div>
+		@section('javascript')
+			<script src="http://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+		@show
 </body>
 </html>

@@ -17,7 +17,6 @@
    
    		<div class="container">
    				<h1>Login</h1>
-
    					<form role="form" method="post" action="{{ URL::route('postLogin') }}">
    							
    							<div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">

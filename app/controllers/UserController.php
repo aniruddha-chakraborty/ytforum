@@ -55,20 +55,21 @@ Class UserController extends BaseController {
 
 		public function postLogin(){
 
-				$validate = Validator::make(Input::all(),array(
+				$Validator = Validator::make(Input::all(),array(
 
 						'username' => 'required',
 						'password' => 'required'
 
 					));
 
-				if ($validate->fails()) {
+				if ($Validator->fails()) {
 					# code...
 						return Redirect::route('getLogin')->withErrors($Validator)->withInput();
 
 				} else {
 
 						$remember = (Input::has('getLogin')) ? true: false;
+
 						$auth = Auth::attempt(array(
 
 								'username' => Input::get('username'),
@@ -78,7 +79,7 @@ Class UserController extends BaseController {
 
 						if ($auth) {
 							# code...
-							return Redirect::intend('/');
+								return Redirect::intended('/');
 						
 							} else {
 
