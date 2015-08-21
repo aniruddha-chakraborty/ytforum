@@ -23,11 +23,26 @@ Route::group(['prefix' => '/forum'] , function(){
 	Route::group(['before' => 'admin'] , function(){
 
 		Route::get('/group/{id}/delete',['uses' => 'ForumController@deleteGroup' , 'as' => 'forum-delete-group']);
+		Route::get('/category/{id}/delete',['uses' => 'ForumController@deleteCategory' , 'as' => 'forum-delete-category']);
 
 		Route::group(['before' => 'csrf'] , function(){
 
+			Route::post('/category/{id}/new',['uses' => 'ForumController@storeCategory' , 'as' => 'forum-store-category']);
 			Route::post('/group' , ['uses' => 'ForumController@storeGroup' , 'as' =>'forum-store-group']);
+
 		});
+
+	});
+
+	Route::group(['before' => 'auth'] , function(){
+
+			Route::get('/thread/{id}/new',['uses' => 'ForumController@newThread','as' => 'forum-get-new-thread']);
+
+				Route::group(['before' => 'csrf'] , function(){
+
+					Route::post('/thread/{id}/new',['uses' => 'ForumController@storeThread' , 'as' => 'forum-store-thread' ]);
+				});
+
 
 	});
 

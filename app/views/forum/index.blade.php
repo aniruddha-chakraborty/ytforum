@@ -18,10 +18,17 @@
 			<div class="panel panel-primary">
 					<div class="panel-heading">
 
+					@if(Auth::check() && Auth::user()->isAdmin())
 					<div class="clearfix">
 						<h3 class="panel-title pull-left">{{ $group->title }}</h3>
+
+						<a id="add-category-{{ $group->id }}" href="#" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">Add new Category</a>
 						<a id="{{ $group->id }}" href="#" data-toggle="modal" data-target="#group_delete" class="btn btn-danger btn-xs pull-right delete_group">Delete</a>
 					</div>
+					@else
+
+						<h3 class="panel-title">{{ $group->title }}</h3>
+					@endif
 
 					</div>
 
@@ -38,7 +45,7 @@
 
 	@endforeach
 
-	@if(Auth::check() && Auth::user()->isAdmin() )	
+	@if(Auth::check() && Auth::user()->isAdmin() )
 		<div class="modal fade" id="group_form" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -53,7 +60,7 @@
 									<form id="target_form" method="post" action="{{ URL::route('forum-store-group') }}">
 
 										<div class="form-group {{ ($errors->has('group_name')) ? 'has-error' : '' }}">
-									
+
 											<label for="group_name">Group Name:</label>
 											<input type="text" id="group_name" name="group_name" class="form-control">
 
@@ -72,6 +79,42 @@
 					</div>
 				</div>
 		</div>
+
+		<!-- This one is for add category -->
+		<div class="modal fade" id="category_modal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span>
+										<span class="sr-only">Close</span>
+								</button>
+								<h4 class="modal-title">New Category</h4>
+							</div>
+							<div class="modal-body">
+									<form id="category_form" method="post">
+
+										<div class="form-group {{ ($errors->has('category_name')) ? 'has-error' : '' }}">
+
+											<label for="category_name">Category name:</label>
+											<input type="text" id="category_name" name="category_name" class="form-control">
+
+											@if($errors->has('category_name'))
+												<p>{{ $errors->first('category_name') }}</p>
+											@endif
+									
+										</div>
+										{{ Form::token() }}
+									</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" id="category_submit">Save</button>
+							</div>
+					</div>
+				</div>
+		</div>
+
 
 		<div class="modal fade" id="group_delete" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog">
@@ -101,7 +144,9 @@
 	@section('javascript')
 		@parent
 		<script type="text/javascript" src="/js/app.js"></script>
+		@if(Session::has('modal'))
 		<script type="text/javascript">
 			$("{{ Session::get('modal') }}").modal("show");
 		</script>
+		@endif
 	@stop
