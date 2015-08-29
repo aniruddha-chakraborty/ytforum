@@ -9,7 +9,7 @@ class ForumCategory extends Eloquent {
 	
 	public function group(){
 
-		$this->belongsTo('ForumGroup');
+		return $this->belongsTo('ForumGroup');
 	}
 
 

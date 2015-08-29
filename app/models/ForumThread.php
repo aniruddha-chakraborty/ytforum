@@ -3,24 +3,29 @@
 /**
 * 
 */
-class ForumThread	 extends Eloquent {
+class ForumThread extends Eloquent {
 	
 	protected $table = 'forum_threads';
 
 
 	public function group(){
 
-		$this->belongsTo('ForumGroup');
+		return $this->belongsTo('ForumGroup');
 	}
 
 	public function category(){
 
-		$this->belongsTo('ForumCategory');
+		return $this->belongsTo('ForumCategory');
 	}
 	
 
 	public function comments(){
 
 			return $this->hasMany('ForumComment','thread_id');
+	}
+	
+	public function author(){
+
+			return $this->hasOne('User','id' , 'author_id');
 	}
 }

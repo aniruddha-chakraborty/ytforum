@@ -17,7 +17,6 @@ $(document).ready(function(){
 		var id = event.target.id;
 		var pieces = id.split('-');
 
-		$('#category_form').prop('action','/forum/category/'+pieces[2]+'/new');
 	});
 
 	$('.delete_group').click(function(event){
@@ -26,7 +25,7 @@ $(document).ready(function(){
 
 	});
 
-	$('delete_category').click(function(event){
+	$('.delete_category').click(function(event){
 
 		 $('#btn_delete_category').prop('href','/forum/category/'+ event.target.id +'/delete');
 	

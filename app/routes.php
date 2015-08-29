@@ -24,10 +24,12 @@ Route::group(['prefix' => '/forum'] , function(){
 
 		Route::get('/group/{id}/delete',['uses' => 'ForumController@deleteGroup' , 'as' => 'forum-delete-group']);
 		Route::get('/category/{id}/delete',['uses' => 'ForumController@deleteCategory' , 'as' => 'forum-delete-category']);
+		Route::get('/thread/{id}/delete' , ['uses' => 'ForumController@deleteThread' , 'as' => 'forum-delete-thread']);
+		Route::get('/comment/{id}/delete',['uses' => 'ForumController@deleteComment' , 'as' => 'forum-delete-comment']);
 
 		Route::group(['before' => 'csrf'] , function(){
 
-			Route::post('/category/{id}/new',['uses' => 'ForumController@storeCategory' , 'as' => 'forum-store-category']);
+			Route::post('/category/{id}/new', ['uses' => 'ForumController@storeCategory' , 'as' => 'forum-store-category'] );
 			Route::post('/group' , ['uses' => 'ForumController@storeGroup' , 'as' =>'forum-store-group']);
 
 		});
@@ -41,9 +43,8 @@ Route::group(['prefix' => '/forum'] , function(){
 				Route::group(['before' => 'csrf'] , function(){
 
 					Route::post('/thread/{id}/new',['uses' => 'ForumController@storeThread' , 'as' => 'forum-store-thread' ]);
+					Route::post('/comment/{id}/new' , ['uses' => 'ForumController@storeComment' , 'as' => 'forum-store-comment']);
 				});
-
-
 	});
 
 });

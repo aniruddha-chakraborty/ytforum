@@ -21,12 +21,10 @@
 					@if(Auth::check() && Auth::user()->isAdmin())
 					<div class="clearfix">
 						<h3 class="panel-title pull-left">{{ $group->title }}</h3>
-
 						<a id="add-category-{{ $group->id }}" href="#" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">Add new Category</a>
 						<a id="{{ $group->id }}" href="#" data-toggle="modal" data-target="#group_delete" class="btn btn-danger btn-xs pull-right delete_group">Delete</a>
 					</div>
 					@else
-
 						<h3 class="panel-title">{{ $group->title }}</h3>
 					@endif
 
@@ -41,6 +39,7 @@
 								@endforeach
 						</div>
 				</div>
+				
 			</div>
 
 	@endforeach
@@ -147,6 +146,13 @@
 		@if(Session::has('modal'))
 		<script type="text/javascript">
 			$("{{ Session::get('modal') }}").modal("show");
+		</script>
+		@endif
+
+		@if(Session::has('category-modal') && Session::has('group-id'))
+			<script type="text/javascript">
+			$('#category_form').prop('action',"/forum/category/{{ Session::get('group-id') }}/new");
+			$("{{ Session::get('category-modal') }}").modal("show");
 		</script>
 		@endif
 	@stop
